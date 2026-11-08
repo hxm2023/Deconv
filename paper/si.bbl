@@ -1,0 +1,38 @@
+\begin{thebibliography}{1}
+
+\bibitem{buades2005}
+Antoni Buades, Bartomeu Coll, and Jean-Michel Morel.
+\newblock A non-local algorithm for image denoising.
+\newblock In {\em IEEE Conference on Computer Vision and Pattern Recognition},
+  volume~2, pages 60--65, 2005.
+
+\bibitem{wiener1949}
+Norbert Wiener.
+\newblock {\em Extrapolation, Interpolation, and Smoothing of Stationary Time
+  Series}.
+\newblock MIT Press, Cambridge, MA, 1949.
+
+\bibitem{richardson1972}
+William~H. Richardson.
+\newblock Bayesian-based iterative method of image restoration.
+\newblock {\em Journal of the Optical Society of America}, 62(1):55--59, 1972.
+
+\bibitem{lucy1974}
+L.~B. Lucy.
+\newblock An iterative technique for the rectification of observed
+  distributions.
+\newblock {\em The Astronomical Journal}, 79:745--754, 1974.
+
+\bibitem{otsu1979}
+Nobuyuki Otsu.
+\newblock A threshold selection method from gray-level histograms.
+\newblock {\em IEEE Transactions on Systems, Man, and Cybernetics},
+  9(1):62--66, 1979.
+
+\bibitem{dabov2007}
+Kostadin Dabov, Alessandro Foi, Vladimir Katkovnik, and Karen Egiazarian.
+\newblock Image denoising by sparse 3-d transform-domain collaborative
+  filtering.
+\newblock {\em IEEE Transactions on Image Processing}, 16(8):2080--2095, 2007.
+
+\end{thebibliography}

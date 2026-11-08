@@ -1,0 +1,401 @@
+{
+  "targets": [
+    33.0,
+    33.5,
+    34.0,
+    34.5,
+    35.0,
+    35.5,
+    36.0,
+    36.5
+  ],
+  "fixed": [
+    {
+      "target": 33.0,
+      "dose": 20.0,
+      "success": 1.0
+    },
+    {
+      "target": 33.5,
+      "dose": 30.0,
+      "success": 1.0
+    },
+    {
+      "target": 34.0,
+      "dose": 50.0,
+      "success": 1.0
+    },
+    {
+      "target": 34.5,
+      "dose": 50.0,
+      "success": 1.0
+    },
+    {
+      "target": 35.0,
+      "dose": 100.0,
+      "success": 1.0
+    },
+    {
+      "target": 35.5,
+      "dose": 100.0,
+      "success": 1.0
+    },
+    {
+      "target": 36.0,
+      "dose": 200.0,
+      "success": 1.0
+    },
+    {
+      "target": 36.5,
+      "dose": 300.0,
+      "success": 1.0
+    }
+  ],
+  "oracle": [
+    {
+      "target": 33.0,
+      "dose": 11.55,
+      "success": 1.0
+    },
+    {
+      "target": 33.5,
+      "dose": 12.55,
+      "success": 0.96
+    },
+    {
+      "target": 34.0,
+      "dose": 16.75,
+      "success": 0.97
+    },
+    {
+      "target": 34.5,
+      "dose": 20.35,
+      "success": 0.92
+    },
+    {
+      "target": 35.0,
+      "dose": 28.95,
+      "success": 0.98
+    },
+    {
+      "target": 35.5,
+      "dose": 44.55,
+      "success": 1.0
+    },
+    {
+      "target": 36.0,
+      "dose": 57.15,
+      "success": 0.95
+    },
+    {
+      "target": 36.5,
+      "dose": 86.4,
+      "success": 0.96
+    }
+  ],
+  "policies": {
+    "ridge_unc": [
+      {
+        "target": 33.0,
+        "dose": 19.65,
+        "success": 1.0,
+        "margin": 0.30601106379740184
+      },
+      {
+        "target": 33.5,
+        "dose": 21.05,
+        "success": 1.0,
+        "margin": 0.20779415197965634
+      },
+      {
+        "target": 34.0,
+        "dose": 29.5,
+        "success": 0.96,
+        "margin": 0.2939104755758726
+      },
+      {
+        "target": 34.5,
+        "dose": 52.0,
+        "success": 0.99,
+        "margin": 0.3775597148424111
+      },
+      {
+        "target": 35.0,
+        "dose": 52.75,
+        "success": 0.95,
+        "margin": 0.27153875625813934
+      },
+      {
+        "target": 35.5,
+        "dose": 102.5,
+        "success": 0.95,
+        "margin": 0.4362072312607633
+      },
+      {
+        "target": 36.0,
+        "dose": 176.0,
+        "success": 1.0,
+        "margin": 0.6275735262319542
+      },
+      {
+        "target": 36.5,
+        "dose": 210.5,
+        "success": 1.0,
+        "margin": 0.7658927754022646
+      }
+    ],
+    "knn_unc": [
+      {
+        "target": 33.0,
+        "dose": 20.85,
+        "success": 1.0,
+        "k": 5,
+        "q": 0.9
+      },
+      {
+        "target": 33.5,
+        "dose": 20.95,
+        "success": 1.0,
+        "k": 5,
+        "q": 0.9
+      },
+      {
+        "target": 34.0,
+        "dose": 24.5,
+        "success": 1.0,
+        "k": 8,
+        "q": 0.9
+      },
+      {
+        "target": 34.5,
+        "dose": 40.5,
+        "success": 0.99,
+        "k": 8,
+        "q": 0.9
+      },
+      {
+        "target": 35.0,
+        "dose": 68.0,
+        "success": 1.0,
+        "k": 5,
+        "q": 0.9
+      },
+      {
+        "target": 35.5,
+        "dose": 78.0,
+        "success": 0.95,
+        "k": 8,
+        "q": 0.9
+      },
+      {
+        "target": 36.0,
+        "dose": 125.0,
+        "success": 1.0,
+        "k": 5,
+        "q": 0.9
+      }
+    ],
+    "ridge_stats": [
+      {
+        "target": 33.0,
+        "dose": 21.0,
+        "success": 0.95,
+        "margin": 0.35532049426549306
+      },
+      {
+        "target": 33.5,
+        "dose": 18.6,
+        "success": 0.95,
+        "margin": 0.1720434530567773
+      },
+      {
+        "target": 34.0,
+        "dose": 25.5,
+        "success": 0.95,
+        "margin": 0.2540085064676848
+      },
+      {
+        "target": 34.5,
+        "dose": 59.0,
+        "success": 0.95,
+        "margin": 0.39609535512432414
+      },
+      {
+        "target": 35.0,
+        "dose": 60.0,
+        "success": 0.95,
+        "margin": 0.29565745869377924
+      },
+      {
+        "target": 35.5,
+        "dose": 113.5,
+        "success": 0.95,
+        "margin": 0.47596117540638105
+      },
+      {
+        "target": 36.0,
+        "dose": 114.5,
+        "success": 0.95,
+        "margin": 0.37209380738127507
+      },
+      {
+        "target": 36.5,
+        "dose": 215.0,
+        "success": 1.0,
+        "margin": 0.7950878463070699
+      }
+    ],
+    "knn_stats": [
+      {
+        "target": 33.0,
+        "dose": 21.4,
+        "success": 0.95,
+        "k": 5,
+        "q": 0.9
+      },
+      {
+        "target": 33.5,
+        "dose": 30.75,
+        "success": 0.95,
+        "k": 8,
+        "q": 0.9
+      },
+      {
+        "target": 34.0,
+        "dose": 32.0,
+        "success": 0.96,
+        "k": 8,
+        "q": 0.9
+      },
+      {
+        "target": 34.5,
+        "dose": 70.75,
+        "success": 0.95,
+        "k": 5,
+        "q": 0.9
+      },
+      {
+        "target": 35.0,
+        "dose": 63.5,
+        "success": 0.95,
+        "k": 8,
+        "q": 0.9
+      },
+      {
+        "target": 35.5,
+        "dose": 165.5,
+        "success": 0.95,
+        "k": 8,
+        "q": 0.95
+      },
+      {
+        "target": 36.0,
+        "dose": 131.5,
+        "success": 0.95,
+        "k": 8,
+        "q": 0.9
+      }
+    ],
+    "ridge_all": [
+      {
+        "target": 33.0,
+        "dose": 19.4,
+        "success": 1.0,
+        "margin": 0.28625967354460996
+      },
+      {
+        "target": 33.5,
+        "dose": 19.7,
+        "success": 0.95,
+        "margin": 0.1819916330547266
+      },
+      {
+        "target": 34.0,
+        "dose": 29.25,
+        "success": 0.96,
+        "margin": 0.23899608166875244
+      },
+      {
+        "target": 34.5,
+        "dose": 54.5,
+        "success": 0.99,
+        "margin": 0.37068435870737687
+      },
+      {
+        "target": 35.0,
+        "dose": 52.25,
+        "success": 0.95,
+        "margin": 0.25176317689355837
+      },
+      {
+        "target": 35.5,
+        "dose": 112.0,
+        "success": 0.95,
+        "margin": 0.44425198596951687
+      },
+      {
+        "target": 36.0,
+        "dose": 143.0,
+        "success": 0.95,
+        "margin": 0.4428775820717312
+      },
+      {
+        "target": 36.5,
+        "dose": 220.0,
+        "success": 1.0,
+        "margin": 0.7821176196175958
+      }
+    ],
+    "knn_all": [
+      {
+        "target": 33.0,
+        "dose": 16.15,
+        "success": 0.95,
+        "k": 3,
+        "q": 0.9
+      },
+      {
+        "target": 33.5,
+        "dose": 22.95,
+        "success": 1.0,
+        "k": 5,
+        "q": 0.9
+      },
+      {
+        "target": 34.0,
+        "dose": 33.25,
+        "success": 1.0,
+        "k": 5,
+        "q": 0.9
+      },
+      {
+        "target": 34.5,
+        "dose": 60.75,
+        "success": 0.99,
+        "k": 5,
+        "q": 0.9
+      },
+      {
+        "target": 35.0,
+        "dose": 77.0,
+        "success": 0.95,
+        "k": 5,
+        "q": 0.9
+      },
+      {
+        "target": 35.5,
+        "dose": 157.0,
+        "success": 0.95,
+        "k": 8,
+        "q": 0.95
+      },
+      {
+        "target": 36.0,
+        "dose": 164.0,
+        "success": 1.0,
+        "k": 8,
+        "q": 0.95
+      }
+    ]
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "unet_gpu_ms": 1.16,
+  "unet_cpu_ms": 29.3,
+  "tvdec_cpu_ms": 103.0,
+  "tvdec_iters": 30,
+  "patch": 128
+}

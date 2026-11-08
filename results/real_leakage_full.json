@@ -1,0 +1,11 @@
+{
+  "n_train": 1951,
+  "n_test": 243,
+  "max_thumb_corr": 0.5488602519035339,
+  "mean_max_thumb_corr": 0.2977345287799835,
+  "n_above_0_8": 0,
+  "n_above_0_9": 0,
+  "top_test_stem": 1613,
+  "top_train_stem": 1036,
+  "top_full_corr": 0.06151244789361954
+}

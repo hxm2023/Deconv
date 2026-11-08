@@ -1,0 +1,28 @@
+{
+  "task": {
+    "linear": 0.795,
+    "cnn": 0.7575,
+    "n_train": 800,
+    "n_test": 800
+  },
+  "dose": {
+    "linear": 0.979,
+    "cnn": 1.0,
+    "n_train": 1000,
+    "n_test": 1000
+  },
+  "dose_used": 30,
+  "tasks": [
+    "bbbc014",
+    "bbbc015",
+    "bbbc016",
+    "bbbc018"
+  ],
+  "doses": [
+    3,
+    10,
+    30,
+    100,
+    300
+  ]
+}

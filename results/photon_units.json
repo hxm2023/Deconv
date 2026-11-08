@@ -1,0 +1,20 @@
+{
+  "3": {
+    "mean_expected": 0.35575172305107117,
+    "mean_of_patch_medians": 0.23651428867131472,
+    "global_median": 0.2004612684249878,
+    "n_patches": 200
+  },
+  "30": {
+    "mean_expected": 3.5575170516967773,
+    "mean_of_patch_medians": 2.365142884850502,
+    "global_median": 2.004612922668457,
+    "n_patches": 200
+  },
+  "300": {
+    "mean_expected": 35.575172424316406,
+    "mean_of_patch_medians": 23.651428809165953,
+    "global_median": 20.046127319335938,
+    "n_patches": 200
+  }
+}

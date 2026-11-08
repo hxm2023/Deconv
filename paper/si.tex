@@ -1,0 +1,551 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{newtxtext,newtxmath}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage{caption}
+\captionsetup{font=small,labelfont=bf}
+\setlength{\emergencystretch}{3em}
+\input{real_numbers}
+\input{fmd_numbers}
+\title{\bfseries Supplementary Information\\
+Dose-agnostic neural deconvolution for\\
+low-dose fluorescence microscopy}
+\author{}
+\date{\today}
+\begin{document}
+\maketitle
+
+\section*{S1. Data, splits, and licenses}
+\begin{table}[h]
+\centering
+\caption{Public datasets used in this study. BBBC014--018 low-dose measurements
+are synthesized from the high-SNR references with the forward model of the main
+text; BBBC039 is used for the downstream segmentation check; the AI4Life pairs
+are native real noisy/clean acquisitions.}
+\small
+\begin{tabular}{lllll}
+\toprule
+Dataset & Role & FOVs used & Size (pixels) & License \\
+\midrule
+BBBC014 channel 1 & train/val/test & 56 / 20 / 20 & $1360\times1024$ & CC BY 3.0 \\
+BBBC015 & external (5 tune / 15 test) & 20 of 144 (channel 0) & $1000\times768$ & CC BY 3.0 \\
+BBBC016 (GFP) & external (5 tune / 15 test) & 20 of 72 & $512\times512$ & CC BY 3.0 \\
+BBBC018 (actin, green) & external (5 tune / 15 test) & 20 of 56 & $512\times512$ & CC BY-NC-SA 3.0 \\
+BBBC039 (Hoechst) & segmentation check & 100 / 50 / 50 & $520\times696$ & CC0 \\
+AI4Life small pairs & real test & 243 held out & $256\times256$ & CC BY 4.0 \\
+AI4Life large pairs & cross-source & 20 & $1024\times1024$ & CC BY 4.0 \\
+FMD fields & second real test & 150 of 301 held out & $256\times256$ & CC BY 4.0 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+BBBC014, BBBC015, and BBBC016 are fluorescence images from the Broad Bioimage
+Benchmark Collection; BBBC015 and BBBC016 are U2OS cytoplasm-to-nucleus assays,
+and BBBC018 provides a different cell type and actin stain. BBBC015 files encode
+two channels; only channel 0 is used. The BBBC018 actin signal is in the green
+channel, which is extracted directly rather than averaged with the blue
+channel. BBBC039 is used only for the downstream nuclei-segmentation check in
+S6. The main split is at
+the field-of-view level; no FOV, well, or acquisition session is shared between
+training, validation, and test. Test FOVs were never used for early stopping,
+baseline tuning, target selection, or performance-based figure selection; the
+qualitative example in Fig.~1 uses a pre-specified test FOV.
+
+The AI4Life-MDC25-Nuclei release (Zenodo 15624741, CC~BY~4.0) is the training
+set of the 2025 AI4Life Microscopy Supervised Denoising Challenge and combines
+two sources: 2{,}457
+$256\times256$ noisy/clean pairs from the Jacquemet noisy-nuclei dataset and 20
+$1024\times1024$ pairs derived from BBBC006. The sources differ in bit depth,
+saturation, and noise model: the small references reach at most 4095 counts,
+whereas the large references are clipped at 65535. We split the small pairs by
+image ID into 1{,}951/243/243 training/validation/test after excluding 20 IDs
+that coincide numerically with the large-field IDs as a precaution; the images
+are not crops of one another (a small image correlates at most 0.33 with any
+tile of the corresponding large field). Over all 1{,}951 training images, the
+maximum test-train thumbnail correlation is 0.55, no pair exceeds 0.8, and the
+top pair has full-resolution correlation 0.06, so there are no near duplicates
+(\texttt{results/real\_leakage\_full.json}). The 20 large fields are used only
+for a cross-source transfer check. The challenge's hidden test set is not
+public, so the comparison uses held-out pairs from the public training release,
+not a leaderboard score.
+
+The AI4Life-MDC25-FMD release (Zenodo 15761900, CC~BY~4.0) contains 63{,}669
+$256\times256$ noisy/clean pairs (multiple frames per field) from three
+microscopes (CF/WF/TP), three channels and four noise levels. We extract one
+frame from each of 1{,}998 fields (seed 0) and split by field, stratified by
+microscope/channel/level, into 1{,}396/301/301 training/validation/test pairs.
+The main comparison uses a pre-specified 150-field subset: four fields per
+microscope/channel/level stratum plus six fifth fields (see
+\texttt{prereg/fmd\_subset150.json}).
+
+\section*{S2. Extended classical baselines}
+The main comparison uses TV deconvolution with the known PSF; after joint
+tuning of weight and ADMM parameters it is the strongest classical method at
+all three doses. Table~\ref{tab:extended} reports additional baselines. The
+NLM \cite{buades2005}, Wiener \cite{wiener1949}, and Richardson--Lucy
+\cite{richardson1972,lucy1974} values use extended parameter grids tuned on
+100 validation patches at each dose. Even with the extended grids, none of these methods
+reaches the network at any dose.
+
+\begin{table}[h]
+\centering
+\caption{Additional classical baselines (PSNR in dB). Doses are $P=3,30,300$
+full scale. NLM, Wiener, and Richardson--Lucy use extended parameter grids
+tuned on 100 validation patches; their values are archived in
+\texttt{results/extended\_baselines.json} from a separate run on the same test
+FOVs. They
+remain below TV deconvolution and the network.}
+\label{tab:extended}
+\begin{tabular}{lccc}
+\toprule
+Method & $P=3$ & $P=30$ & $P=300$ \\
+\midrule
+Noisy input & 14.60 & 24.10 & 32.48 \\
+TV denoising & 30.31 & 34.08 & 36.26 \\
+TV deconvolution & 31.34 & 35.34 & 38.63 \\
+NLM (Anscombe) & 28.55 & 33.31 & 36.41 \\
+Wiener & 29.15 & 33.43 & 34.79 \\
+Richardson--Lucy & 29.31 & 33.62 & 34.59 \\
+U-Net (mixed-dose) & 32.27 & 36.70 & 40.01 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\centering
+\caption{Validation-selected fixed doses. The dose is the smallest one reaching
+90\% success on the 20 validation FOVs and is then applied unchanged to test.
+A dash under test success means the validation-selected dose did not reach 90\%
+on the held-out FOVs; the factor is then also shown as a dash because it is not
+claimed.}
+\label{tab:protocol}
+\input{tables/protocol}
+\end{table}
+
+\begin{table}[t]
+\centering
+\caption{Test-oracle protocol doses (upper bound): the smallest dose reaching
+90\% success on the test FOVs. This is not a deployable selection rule and is
+reported only for comparison with the validation-selected table.}
+\label{tab:protocoloracle}
+\input{tables/protocol_oracle}
+\end{table}
+
+\begin{table}[t]
+\centering
+\caption{Ablations (PSNR in dB, matched patches). Top: original base budget,
+with per-dose specialists (16k patches/60 epochs), the mixed-dose model
+(24k/100), the dose-conditioned variant (24k/100), the phase-scrambled control
+(24k/100, conditioned architecture), and tuned TV deconvolution. Middle: the
+budget-matched specialists, mixed-dose model, dose-conditioned variant, and
+blind phase-scrambled control (all 64 channels, 48k patches, 150 epochs).
+Bottom: PSF width at $P=30$ for the strong mixed-dose model.}
+\label{tab:ablation}
+\small
+\input{tables/ablation}
+\end{table}
+
+The budget-matched specialists (64 channels, 48k patches, 150 epochs) reach
+32.36, 36.72, and 38.68\,dB at $P=3,30,100$, within 0.1\,dB of the blind model
+at the same doses (\texttt{results/spec\_strong.json}). The largest difference
+is at $P=3$ (+0.09\,dB for the specialist), which is the same order as the
+patch-draw variation.
+
+\section*{S2b. Protocol selection and uncertainty}
+The primary protocol selects the smallest dose reaching 90\% success on the 20
+validation FOVs and applies it unchanged to the held-out FOVs
+(Table~\ref{tab:protocol}). Four targets give a 3--3.3$\times$ reduction in
+dose $P$ (equivalently, photon budget) with both methods meeting the test
+criterion (PSNR 32 and 34\,dB, SSIM 0.90,
+and foreground PSNR 26\,dB); three are ties (SSIM 0.85 and 0.92, foreground
+PSNR 24\,dB); and two validation selections miss the test criterion (the U-Net
+dose at PSNR 30\,dB reaches 80\%, and the TV dose at foreground PSNR 22\,dB
+reaches 80\%), so those factors are not claimed. Table~\ref{tab:protocoloracle}
+reports the test-oracle doses as an upper bound; because the dose grid has five
+points and 90\% success corresponds to 18/20 FOVs, selection noise is
+substantial. A FOV bootstrap (2,000 resamples, resampling test FOVs within each
+dose) gives the oracle factor distributions in Table~\ref{tab:protocolci};
+these characterize the test-oracle upper bound, not a deployable protocol
+(\texttt{results/protocol\_ci.json}). No $10\times$ saving remains after the TV
+baseline is tuned.
+
+\begin{table}[h]
+\centering
+\caption{Test-oracle protocol doses and FOV-bootstrap factor CIs (2,000
+resamples); this is an upper bound, not a validation-selected protocol.}
+\label{tab:protocolci}
+\small
+\begin{tabular}{lcccc}
+\toprule
+Target & U-Net dose & TV dose & Factor [95\% CI] & Bootstrap $\geq$ threshold \\
+\midrule
+PSNR 30\,dB & 10 & 10 & 1.0 [1, 3.3] & 20.9\% $\geq3\times$ \\
+PSNR 32\,dB & 10 & 30 & 3.0 [1, 3] & 96.6\% $\geq3\times$ \\
+PSNR 34\,dB & 30 & 100 & 3.3 [3.3, 3.3] & 99.9\% $\geq3\times$ \\
+SSIM 0.85 & 3 & 3 & 1.0 [1, 3.3] & 7.9\% $\geq3\times$ \\
+SSIM 0.90 & 10 & 30 & 3.0 [1, 3] & 81.3\% $\geq3\times$ \\
+SSIM 0.92 & 30 & 30 & 1.0 [1, 3.3] & 48.4\% $\geq3\times$ \\
+FG PSNR 22\,dB & 3 & 10 & 3.3 [1, 3.3] & 79.5\% $\geq3\times$ \\
+FG PSNR 24\,dB & 10 & 10 & 1.0 [1, 3] & 32.8\% $\geq3\times$ \\
+FG PSNR 26\,dB & 30 & 100 & 3.3 [1, 3.3] & 97.0\% $\geq3\times$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section*{S3. Per-FOV adaptive allocation}
+An oracle with access to each FOV's full dose-response would save photons
+(Table~\ref{tab:adaptive}). A ground-truth-free policy used a cheap preview,
+ensemble uncertainty, and ridge or k-nearest-neighbour calibration on the 20
+validation FOVs. At a 34\,dB target, the kNN policy used dose $P=24.5$ at 100\%
+success versus $P=30$ for the best fixed dose at 95--96\% success, a
+modest gain. At 35\,dB, the best fixed dose at 95\% test success was $P=50$,
+while the six policies used $P=52$--77; no policy improved on the fixed
+protocol. The preview dose is part of the final dose (the final image is
+acquired by escalating from the preview), so the cost is the final dose, not
+preview plus final. The gain is therefore target-dependent and not robust
+enough to replace a fixed dose, which is why the main protocol uses a fixed
+dose.
+
+\begin{table}[h]
+\centering
+\caption{Adaptive allocation at two targets. ``Fixed'' is the dose selected on
+validation for 90\% success; ``best fixed at test'' is the smallest fixed dose
+that matches the reported test success; ``oracle'' uses each FOV's own curve.
+Doses are $P$ in full-scale units.}
+\label{tab:adaptive}
+\begin{tabular}{lcccc}
+\toprule
+Target & Fixed & Best fixed at test & Oracle & kNN (uncertainty) \\
+\midrule
+PSNR 34\,dB & 50 & 30 (95--96\%) & 17 & 24.5 (100\%) \\
+PSNR 35\,dB & 100 & 50 (95\%) & 29 & 68 (100\%) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section*{S4. Uncertainty details}
+The ensemble contains three dose-conditioned networks trained with seeds 0, 1,
+and 2 with the original 32-channel/24k-patch budget. That base-budget
+conditioned model is 0.07--0.32\,dB below the strong mixed-dose main model; the
+ensemble is used as a proxy for uncertainty behavior, and its absolute
+calibration against the stronger model is not tested. The uncertainty score is the mean per-pixel standard deviation across
+the three predictions. At $P=3$ and 10, 15 and 11 of the 20 test FOVs,
+respectively, fall below 34\,dB; the corresponding AUCs are 0.96 (95\% CI
+0.84--1.00) and 0.96 (0.85--1.00; \texttt{results/uncertainty\_ci.json}). At
+$P=30$ only one FOV falls below the target, so the AUC is not reported. The
+uncertainty also correlates with reconstruction RMSE (Spearman $\rho=0.92$ at
+$P=3$). The uncertainty maps are not a proof of artifact-free reconstruction;
+they identify fields where the ensemble disagrees and where additional light is
+most useful.
+
+\section*{S4b. Read noise and photon units}
+At $P=30$, adding Gaussian read noise with standard deviation 0.005 or 0.01
+(1.3 or 2.6 8-bit counts) changed the strong mixed-dose model from 36.70 to
+36.68 and 36.66\,dB, and fair TV deconvolution from 35.34 to 35.32 and
+35.30\,dB (\texttt{results/read\_noise\_fair.json}). The relative ranking is
+unchanged. The dose $P$ is the Poisson scale at full 8-bit
+intensity; the mean detected photons per pixel on the test patches are 0.36,
+3.56, and 35.6 at $P=3,30,300$ (Poisson means; \texttt{results/photon\_units.json}).
+The absolute photon counts should therefore be read as full-scale units, not as
+calibrated photons per emitter.
+
+\section*{S4c. Doses not used in training}
+To test whether the model memorized the five training doses, we evaluated it on
+the 20 test FOVs at $P=5,50,200$ (full-scale dose), which were never used for
+training.
+The measured PSNR is within 0.02\,dB of log-dose interpolation between the
+neighboring trained doses (Table~\ref{tab:heldout};
+\texttt{results/heldout\_doses.json}).
+
+\begin{table}[h]
+\centering
+\caption{Strong mixed-dose model at held-out doses (PSNR, dB). Interpolation is
+linear in $\log_{10}P$ between the two neighboring training doses.}
+\label{tab:heldout}
+\begin{tabular}{lcccc}
+\toprule
+$P$ & Neighbors & Interpolated & Measured & Residual \\
+\midrule
+5   & 3, 10    & 33.32 & 33.32 & $0.00$ \\
+50  & 30, 100  & 37.51 & 37.50 & $-0.01$ \\
+200 & 100, 300 & 39.49 & 39.47 & $-0.02$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section*{S4d. Physical widefield PSF}
+The main simulation uses a Gaussian PSF. To test a physically motivated PSF,
+we repeated the $P=3/30/300$ benchmark with an in-focus scalar Airy PSF for a
+circular aperture (NA 1.4, $\lambda=520$\,nm, 100\,nm pixels). TV deconvolution
+was retuned on five validation FOVs with the correct Airy PSF. The
+Gaussian-trained strong model loses its advantage at high dose, while a model
+trained on a 50/50 Gaussian/Airy mixture (same 64-channel/48k/150 schedule)
+retains positive gains at all three doses (Table~\ref{tab:airy}). On the
+Gaussian benchmark the same mixed model reaches 32.26/36.60/39.83\,dB at
+$P=3/30/300$, a loss of 0.01--0.18\,dB relative to the Gaussian-trained model
+(\texttt{results/psf\_airy.json}, \texttt{results/psf\_airy\_mix.json},
+\texttt{results/psf\_airy\_mix\_stats.json}, and
+\texttt{results/blind\_psfmix\_gauss.json}).
+
+\begin{table}[h]
+\centering
+\caption{Physical Airy PSF check (PSNR, dB). TV deconvolution uses the correct
+Airy PSF and validation-tuned parameters. ``Gaussian-trained'' is the main
+model; ``PSF-mixed'' is trained on a 50/50 Gaussian/Airy mixture.}
+\label{tab:airy}
+\small
+\begin{tabular}{lcccc}
+\toprule
+$P$ & Gaussian-trained & PSF-mixed & TV (Airy) & PSF-mixed gain \\
+\midrule
+3   & 32.63 & 32.71 & 31.21 & +1.50 [1.35, 1.65] \\
+30  & 36.64 & 37.61 & 36.23 & +1.39 [1.28, 1.48] \\
+300 & 37.05 & 41.55 & 40.26 & +1.29 [1.13, 1.45] \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section*{S5. Reproducibility}
+\paragraph{Data.}
+The four archives were downloaded from
+\texttt{data.broadinstitute.org/bbbc}. SHA-256 checksums:
+{\footnotesize
+\begin{verbatim}
+BBBC014 223c3230c164c8295f4626f82e4bd9fe394d8e9339a4f82faf697fdd9b835341
+BBBC015 8c7c2abc579ff34173b49ccd06a167e1ad682f35506aa3f6e333d0336e1bad23
+BBBC016 866ea3e6229a0f6fa2c9a18852b3274f7617326ecfae15d40f7f5e1123df7dd1
+BBBC018 e2996b78e16de2eff74db649c1fe5335edfd82ded061e7e6afeadf27caa09df1
+BBBC039 images 6f30a5d4fe38c928ded972704f085975f8dc0d65d9aa366df00e5a9d449fddd7
+BBBC039 masks  f9e6043d8ca56344a4886f96a700d804d6ee982f31e2b2cd3194af2a053c2710
+AI4Life Nuclei c7f2f5477a205e6020b74fded45d8f34f5383c82d261f5f401c1af58306dd7dc
+AI4Life FMD    5110e958bef215e42649c2477855ea11f402842e11523ba0aebf05a634d7eb8f
+\end{verbatim}
+}
+
+\paragraph{Training and evaluation.}
+The main mixed-dose model was trained with
+\begin{verbatim}
+python src/train_unet.py --dataset bbbc014 --n-val 20 --n-test 20 \
+  --ch 64 --patches 48000 --epochs 150 --val-patches 4 --mixed-doses \
+  --val-all-doses --out checkpoints/bbbc014_blind_strong.pt
+\end{verbatim}
+The budget-matched strong conditioned variant adds \texttt{--dose-cond} and
+writes \texttt{bbbc014\_dcond\_strong.pt}; budget-matched specialists use
+\texttt{--photons 3}, 30, or 100 with the same 64-channel/48k/150 schedule
+(\texttt{bbbc014\_spec*\_strong.pt}). The PSF-mixed variant adds
+\texttt{--psf-mix} and writes \texttt{bbbc014\_blind\_psfmix.pt}. The
+base-budget ablation in Table~\ref{tab:ablation} uses 24{,}000 patches and 100
+epochs; its specialists use 16{,}000 patches and 60 epochs, and its
+phase-scrambled control uses \texttt{--dose-cond --scramble} with the
+24{,}000-patch/100-epoch schedule. The budget-matched blind control uses the
+same 64-channel/48{,}000-patch/150-epoch mixed-dose schedule with
+\texttt{--scramble}. Evaluation
+uses \texttt{src/eval\_blind\_strong.py}, \texttt{src/eval\_dcond\_strong.py},
+\texttt{src/eval\_scr\_strong.py}, \texttt{src/eval\_spec\_strong.py},
+\texttt{src/eval\_matched\_ablation.py}, \texttt{src/bench\_tvdeconv.py},
+\texttt{src/eval\_psf\_airy.py}, and \texttt{src/bench\_clean.py}. Figures and tables are regenerated with
+\texttt{src/make\_fair\_assets.py}, \texttt{src/make\_fig1.py},
+\texttt{src/make\_fig2.py}, \texttt{src/make\_fig3.py}, and
+\texttt{src/make\_fig\_real.py}.
+
+\paragraph{Hardware.}
+Training and inference used an NVIDIA A100-PCIE-40GB GPU. TV deconvolution and
+the CPU latency measurement used one core of the host CPU. The main split seed
+is 0; the test noise seed for the matched benchmark is 2026.
+
+\paragraph{Patch-draw sensitivity.}
+The headline values use the declared ten-patch, seed-2026 benchmark. To check
+the dependence on that draw, we repeated the comparison over five independent
+draws of 4 or 10 patches per FOV. The paired gain remained 0.80--1.01\,dB at
+$P=3$, 1.30--1.45\,dB at $P=30$, and 1.29--1.43\,dB at $P=300$; the absolute
+PSNR changes with the draw, but the gain does not
+(\texttt{results/patch\_draw.json}). The GPU speed factor is computed from the
+rounded 1.2\,ms ($103/1.2=86$); the unrounded 1.16\,ms gives 89.
+
+\paragraph{Code.}
+The project repository contains the forward model, data loaders, splits,
+baselines, training scripts, evaluation scripts, result JSON files,
+checkpoints (with SHA-256 sums in \texttt{checkpoints/SHA256SUMS}), and figure
+scripts; the training commands above regenerate any omitted weight. No
+proprietary data are used.
+
+\section*{S6. Downstream segmentation check}
+BBBC039 provides 200 Hoechst-stained FOVs with foreground masks and an official
+100/50/50 split. The restoration model was trained on 12{,}000 patches for 40
+epochs with doses including $P=1$; it has no segmentation loss. TV
+deconvolution and TV denoising parameters were tuned per dose on the
+validation FOVs (not test), and Otsu \cite{otsu1979} was applied identically to every method.
+Table~\ref{tab:seg} reports all 50 official test FOVs. With tuned TV, the
+restoration model improves Dice by only about 0.02 against the best tuned TV
+(0.795 versus 0.773 at $P=1$, a gain of 0.022; 0.844 versus 0.824 at $P=3$, a
+gain of 0.020). This downstream check therefore supports only a small utility
+gain and is not used as a main claim.
+
+\begin{table}[h]
+\centering
+\caption{BBBC039 nuclei Dice at selected doses (full-scale $P$); 50 official
+test FOVs, TV tuned per dose on validation, Otsu applied to every method.}
+\label{tab:seg}
+\begin{tabular}{lccccc}
+\toprule
+Method & $P=1$ & $P=3$ & $P=10$ & $P=30$ & $P=100$ \\
+\midrule
+Noisy + Otsu & 0.192 & 0.344 & 0.434 & 0.575 & 0.769 \\
+TV denoise + Otsu & 0.772 & 0.824 & 0.857 & 0.873 & 0.882 \\
+TV deconv + Otsu & 0.773 & 0.815 & 0.843 & 0.870 & 0.885 \\
+U-Net + Otsu & 0.795 & 0.844 & 0.878 & 0.890 & 0.898 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\section*{S7. Real noisy/clean pairs}
+The real-data check uses the AI4Life-MDC25-Nuclei release
+(Zenodo 15624741, CC BY 4.0). The network has the same architecture as the main
+model with 48 channels in the first level and is trained on $128\times128$
+patches from the 1{,}951 training pairs (16{,}000 patches, 80 epochs, batch
+64, Adam, learning rate $10^{-3}$, cosine schedule, flips and $90^\circ$
+rotations). Each image is normalized independently to its 0.5--99.9 percentile
+range. The checkpoint is selected on the 243 validation pairs (28.6\,dB). Classical parameters are tuned on five
+validation pairs; Table~\ref{tab:realtune} lists the grids and selected values
+(grid means archived in \texttt{results/real\_small\_tuning\_grid.json}).
+Test pairs are never used for tuning or early stopping.
+
+\begin{table}[h]
+\centering
+\caption{Classical parameter tuning on five real validation pairs (mean PSNR
+in dB).}
+\label{tab:realtune}
+\small
+\begin{tabular}{lll}
+\toprule
+Method & Grid (PSNR, dB) & Selected \\
+\midrule
+BM3D $\sigma$ & 0.2:22.60, 0.3:23.30, 0.4:23.30, 0.5:23.28, 0.7:23.24, 1.0:23.20 & 0.3 \\
+NLM $h$ & 0.1:22.06, 0.15:23.30, 0.2:23.35, 0.25:23.23, 0.3:23.11 & 0.2 \\
+TV $w$ & 0.08:21.44, 0.12:22.12, 0.16:22.14, 0.20:22.33, 0.24:22.45, 0.32:22.45, 0.4:22.38 & 0.24 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:real} reports all \RealN\ held-out test pairs. The network
+reaches \RealUnetP\,dB and \RealUnetS\ SSIM, versus \RealBMThreeP\,dB and
+\RealBMThreeS\ for affine-calibrated BM3D \cite{dabov2007}, \RealNlmP\,dB and \RealNlmS\ for
+NLM, \RealTvP\,dB and \RealTvS\ for TV, and \RealNoisyP\,dB and \RealNoisyS\
+for the noisy input. The paired gain over BM3D is \RealGain\,dB (95\% CI
+\RealCI; exact Wilcoxon $p=\RealPvalue$; \RealWins/\RealN\ wins), over NLM
+\RealGainNlm\,dB, and over TV \RealGainTv\,dB. A second supervised baseline, a
+17-layer DnCNN trained with the same 16{,}000 patches and 80 epochs, reaches
+\RealDncnnP\,dB and \RealDncnnS\ SSIM, \RealDncnnGain\,dB above affine-calibrated
+BM3D and \RealUnetGainDncnn\,dB below the U-Net (95\% CI
+\RealUnetDncnnCI; \RealUnetDncnnWins/243 wins). No pair is empty (minimum
+ground-truth standard deviation 0.047).
+
+\paragraph{Affine calibration.}
+The supervised networks are trained to predict the clean reference, so they can
+learn a global gain and offset that BM3D, NLM, and TV cannot. For the main
+comparison, each classical method receives one global affine map fitted on the
+five validation pairs and applied to the held-out outputs. The raw uncalibrated
+values are \RealBMThreeRawP, \RealNlmRawP, and \RealTvRawP\,dB, giving a raw
+gain of about 7.7\,dB; the affine-calibrated values are \RealBMThreeP,
+\RealNlmP, and \RealTvP\,dB (gain \RealGain\,dB, 95\% CI \RealCI). Both raw
+and calibrated values are reported; the calibrated values are used in the main
+comparison. Refitting the maps on 5, 20, 50, or all 243 validation pairs
+changed the BM3D gain coefficient from 1.26 to 1.33 (NLM 1.30--1.40; TV
+1.30--1.39). On a fixed 20-pair test subset, the resulting gain changed from
+3.74 to 3.98\,dB (\texttt{results/real\_affine\_stability.json} and
+\texttt{results/real\_affine\_243cal\_20.json}), so the five-pair choice does
+not drive the reported effect.
+
+\begin{table}[h]
+\centering
+\caption{Real noisy/clean pairs from the AI4Life-MDC25 Jacquemet source.
+\RealN\ held-out $256\times256$ pairs; classical parameters tuned on
+validation pairs. PSNR in dB.}
+\label{tab:real}
+\input{tables/real}
+\end{table}
+
+\paragraph{Cross-source check.} Applying the same weights to the 20 large
+BBBC006 fields gives \LargeRealUnetP\,dB, below BM3D (\LargeRealBMThreeP\,dB),
+NLM (\LargeRealNlmP\,dB), and TV (\LargeRealTvP\,dB); the noisy input is
+\LargeRealNoisyP\,dB. These fields have 16-bit saturated references and a
+different noise model. The failure is a domain shift, not a contradiction of
+the in-source result; it sets the scope of the real-data claim to matched
+acquisition.
+
+A label-free variant trained only on the noisy images (J-invariant block mask,
+no clean targets) reached 17.89\,dB and 0.196 SSIM on the same 243 pairs,
+1.45\,dB above the noisy input but 3.41\,dB below tuned BM3D; a checkerboard
+mask learned the identity because the real camera noise is spatially correlated
+(\texttt{results/real\_selfsup\_all.json}). The paired clean references are
+therefore necessary for the present gain.
+
+{\raggedright
+\paragraph{Reproduction.} The pipeline is \texttt{src/train\_real.py},
+\texttt{src/tune\_real\_classical.py}, \texttt{src/eval\_real\_small\_par.py},
+\texttt{src/eval\_real\_large\_par.py}, and \texttt{src/make\_real\_assets.py};
+\texttt{src/make\_fig\_real.py} regenerates Fig.~4.\par}
+
+\section*{S7b. Second real source (FMD)}
+The FMD model uses the original base budget (32 channels, 8{,}000 patches,
+40 epochs), not the stronger 48-channel nuclei model, and is trained on the
+1{,}396 field-split FMD
+training pairs (301 validation, 301 held-out; one frame per field, and no field
+crosses splits; \texttt{datasets/fmd/split.json}). Classical baselines are
+tuned separately for each microscope on five validation fields. The selected
+BM3D sigmas are 0.12 (CF), 0.15 (TP), and 8.0 (WF); NLM uses $h=0.1$ for all
+three; TV weights are 0.08 (CF) and 0.12 (TP, WF)
+(\texttt{results/fmd\_tuning\_micro.json}). On a pre-specified stratified subset
+of \FmdN\ of the 301 held-out fields (four per microscope/channel/level
+stratum, plus six fifth fields; the 150 fields are listed in
+\texttt{prereg/fmd\_subset150.json}), the U-Net reaches \FmdUnetP\,dB and
+\FmdUnetS\ SSIM, versus \FmdBMThreeP\,dB and
+\FmdBMThreeS\ for BM3D, \FmdNlmP\,dB and \FmdNlmS\ for NLM, \FmdTvP\,dB and
+\FmdTvS\ for TV, and \FmdNoisyP\,dB for the noisy input. The paired gain over
+BM3D is \FmdGain\,dB (95\% CI \FmdCI; \FmdWins/\FmdN\ fields, Wilcoxon
+$p=\FmdPvalue$; \texttt{results/fmd\_test150\_micro.json} and
+\texttt{results/fmd\_stats.json}). The gain is positive in all \FmdStrataN\
+strata, with group means from \FmdStrataMin\ to \FmdStrataMax\,dB; per
+microscope, the mean gains are +1.87 (CF), +3.41 (TP), and +5.96 (WF), and the
+largest gains are in WF. Baselines were tuned per microscope on five validation
+fields; BM3D grids were 0.05--0.3 for CF/TP and 3--20 for WF, and the selected
+sigmas 0.12, 0.15, and 8.0 are interior to those grids. The TV grid ended at
+0.12 for TP and WF, and the selected weights lie at that boundary; we did not
+extend the grid, so the secondary TV comparison may slightly understate the
+tuned TV baseline. The FMD headline comparison is against BM3D. The FMD classical outputs are not affine-calibrated on FMD
+validation fields, so these numbers are not directly comparable to the nuclei
+table and should be read as a secondary upper
+bound. The remaining 151 test fields were not evaluated with BM3D because of
+its cost; the 150-field subset was pre-specified before prediction, and this is
+a secondary check. FMD is a separate underlying dataset in the same AI4Life
+release and required
+retraining, so it is not a zero-shot cross-source transfer.
+
+\paragraph{Reproduction.} The FMD pipeline in \texttt{src/} consists of
+\texttt{fmd\_prepare.py}, \texttt{fmd\_resplit.py}, \texttt{train\_fmd.py},
+\texttt{make\_fmd\_subset.py}, \texttt{tune\_fmd\_micro.py},
+\texttt{eval\_fmd\_par.py}, \texttt{analyze\_fmd150.py}, and
+\texttt{make\_fmd\_assets.py}.
+
+\section*{S8. Task and dose identifiability probes}
+To check whether the acquisition parameters are available to the blind network,
+we trained probes to predict the dose (five levels on BBBC014) and the source
+task (BBBC014/015/016/018) from a single noisy $128\times128$ patch. Each probe
+uses 10 training and 10 test FOVs per class, 20 patches per FOV, with FOV-level
+splits. We compare a logistic regression on 14 simple features (intensity
+moments, percentiles, gradient energy, Laplacian variance, and three radial FFT
+bands) with a small CNN. The dose is identified with 97.9\% (linear) and 100\%
+(CNN) accuracy ($n=1000/1000$; chance 20\%), and the task with 79.5\% and
+75.8\% accuracy ($n=800/800$; chance 25\%). The dose result supports the
+interpretation that the mixed-dose network can infer the noise level
+internally; the task result is consistent with the positive but smaller
+cross-dataset transfer. Code: \texttt{src/probe\_task\_dose.py}; result:
+\texttt{results/probe\_task\_dose.json}.
+
+\bibliographystyle{unsrt}
+\bibliography{references}
+\end{document}

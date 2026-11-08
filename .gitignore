@@ -1,0 +1,43 @@
+# Raw and derived datasets are downloaded separately; see DATASETS.md.
+datasets/
+data_lab/
+
+# Build products
+*.aux
+*.log
+*.out
+*.blg
+*.spl
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+paper/archive/
+paper/main_build.pdf
+paper/main_check.pdf
+paper/main_build.bbl
+paper/main_zh_build.pdf
+paper/main_zh_build.bbl
+paper/main_zh_build.aux
+paper/main_zh_build.log
+paper/main_zh_build.out
+figures/archive/
+
+# Exploratory/preview renders at the repository root
+/real_full.png
+/real_montage.png
+/real_test_montage.png
+/texput.log
+.tmp_review/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Duplicated unpacked upload directories (the zip is tracked)
+upload_package/Deconv_Overleaf/
+upload_package/Deconv_Overleaf_rev2/
+
+# OS
+.DS_Store
+Thumbs.db

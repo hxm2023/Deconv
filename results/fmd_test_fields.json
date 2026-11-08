@@ -1,0 +1,434 @@
+[
+  {
+    "key": [
+      "CF",
+      "B",
+      "1",
+      "886"
+    ],
+    "frame": 30,
+    "gt": "gt/CF_B_L1_886_30.tif",
+    "noisy": "noisy/CF_B_L1_886_30.tif",
+    "stem": "CF_B_L1_886_30"
+  },
+  {
+    "key": [
+      "CF",
+      "B",
+      "2",
+      "751"
+    ],
+    "frame": 23,
+    "gt": "gt/CF_B_L2_751_23.tif",
+    "noisy": "noisy/CF_B_L2_751_23.tif",
+    "stem": "CF_B_L2_751_23"
+  },
+  {
+    "key": [
+      "CF",
+      "B",
+      "3",
+      "859"
+    ],
+    "frame": 17,
+    "gt": "gt/CF_B_L3_859_17.tif",
+    "noisy": "noisy/CF_B_L3_859_17.tif",
+    "stem": "CF_B_L3_859_17"
+  },
+  {
+    "key": [
+      "CF",
+      "B",
+      "4",
+      "870"
+    ],
+    "frame": 23,
+    "gt": "gt/CF_B_L4_870_23.tif",
+    "noisy": "noisy/CF_B_L4_870_23.tif",
+    "stem": "CF_B_L4_870_23"
+  },
+  {
+    "key": [
+      "CF",
+      "G",
+      "1",
+      "903"
+    ],
+    "frame": 13,
+    "gt": "gt/CF_G_L1_903_13.tif",
+    "noisy": "noisy/CF_G_L1_903_13.tif",
+    "stem": "CF_G_L1_903_13"
+  },
+  {
+    "key": [
+      "CF",
+      "G",
+      "2",
+      "905"
+    ],
+    "frame": 10,
+    "gt": "gt/CF_G_L2_905_10.tif",
+    "noisy": "noisy/CF_G_L2_905_10.tif",
+    "stem": "CF_G_L2_905_10"
+  },
+  {
+    "key": [
+      "CF",
+      "G",
+      "3",
+      "891"
+    ],
+    "frame": 16,
+    "gt": "gt/CF_G_L3_891_16.tif",
+    "noisy": "noisy/CF_G_L3_891_16.tif",
+    "stem": "CF_G_L3_891_16"
+  },
+  {
+    "key": [
+      "CF",
+      "G",
+      "4",
+      "897"
+    ],
+    "frame": 23,
+    "gt": "gt/CF_G_L4_897_23.tif",
+    "noisy": "noisy/CF_G_L4_897_23.tif",
+    "stem": "CF_G_L4_897_23"
+  },
+  {
+    "key": [
+      "CF",
+      "R",
+      "1",
+      "858"
+    ],
+    "frame": 47,
+    "gt": "gt/CF_R_L1_858_47.tif",
+    "noisy": "noisy/CF_R_L1_858_47.tif",
+    "stem": "CF_R_L1_858_47"
+  },
+  {
+    "key": [
+      "CF",
+      "R",
+      "2",
+      "883"
+    ],
+    "frame": 4,
+    "gt": "gt/CF_R_L2_883_4.tif",
+    "noisy": "noisy/CF_R_L2_883_4.tif",
+    "stem": "CF_R_L2_883_4"
+  },
+  {
+    "key": [
+      "CF",
+      "R",
+      "3",
+      "877"
+    ],
+    "frame": 11,
+    "gt": "gt/CF_R_L3_877_11.tif",
+    "noisy": "noisy/CF_R_L3_877_11.tif",
+    "stem": "CF_R_L3_877_11"
+  },
+  {
+    "key": [
+      "CF",
+      "R",
+      "4",
+      "919"
+    ],
+    "frame": 6,
+    "gt": "gt/CF_R_L4_919_6.tif",
+    "noisy": "noisy/CF_R_L4_919_6.tif",
+    "stem": "CF_R_L4_919_6"
+  },
+  {
+    "key": [
+      "TP",
+      "B",
+      "1",
+      "904"
+    ],
+    "frame": 20,
+    "gt": "gt/TP_B_L1_904_20.tif",
+    "noisy": "noisy/TP_B_L1_904_20.tif",
+    "stem": "TP_B_L1_904_20"
+  },
+  {
+    "key": [
+      "TP",
+      "B",
+      "2",
+      "877"
+    ],
+    "frame": 15,
+    "gt": "gt/TP_B_L2_877_15.tif",
+    "noisy": "noisy/TP_B_L2_877_15.tif",
+    "stem": "TP_B_L2_877_15"
+  },
+  {
+    "key": [
+      "TP",
+      "B",
+      "3",
+      "842"
+    ],
+    "frame": 6,
+    "gt": "gt/TP_B_L3_842_6.tif",
+    "noisy": "noisy/TP_B_L3_842_6.tif",
+    "stem": "TP_B_L3_842_6"
+  },
+  {
+    "key": [
+      "TP",
+      "B",
+      "4",
+      "915"
+    ],
+    "frame": 49,
+    "gt": "gt/TP_B_L4_915_49.tif",
+    "noisy": "noisy/TP_B_L4_915_49.tif",
+    "stem": "TP_B_L4_915_49"
+  },
+  {
+    "key": [
+      "TP",
+      "G",
+      "1",
+      "915"
+    ],
+    "frame": 31,
+    "gt": "gt/TP_G_L1_915_31.tif",
+    "noisy": "noisy/TP_G_L1_915_31.tif",
+    "stem": "TP_G_L1_915_31"
+  },
+  {
+    "key": [
+      "TP",
+      "G",
+      "2",
+      "833"
+    ],
+    "frame": 11,
+    "gt": "gt/TP_G_L2_833_11.tif",
+    "noisy": "noisy/TP_G_L2_833_11.tif",
+    "stem": "TP_G_L2_833_11"
+  },
+  {
+    "key": [
+      "TP",
+      "G",
+      "3",
+      "861"
+    ],
+    "frame": 0,
+    "gt": "gt/TP_G_L3_861_0.tif",
+    "noisy": "noisy/TP_G_L3_861_0.tif",
+    "stem": "TP_G_L3_861_0"
+  },
+  {
+    "key": [
+      "TP",
+      "G",
+      "4",
+      "911"
+    ],
+    "frame": 5,
+    "gt": "gt/TP_G_L4_911_5.tif",
+    "noisy": "noisy/TP_G_L4_911_5.tif",
+    "stem": "TP_G_L4_911_5"
+  },
+  {
+    "key": [
+      "TP",
+      "R",
+      "1",
+      "857"
+    ],
+    "frame": 16,
+    "gt": "gt/TP_R_L1_857_16.tif",
+    "noisy": "noisy/TP_R_L1_857_16.tif",
+    "stem": "TP_R_L1_857_16"
+  },
+  {
+    "key": [
+      "TP",
+      "R",
+      "2",
+      "890"
+    ],
+    "frame": 6,
+    "gt": "gt/TP_R_L2_890_6.tif",
+    "noisy": "noisy/TP_R_L2_890_6.tif",
+    "stem": "TP_R_L2_890_6"
+  },
+  {
+    "key": [
+      "TP",
+      "R",
+      "3",
+      "898"
+    ],
+    "frame": 0,
+    "gt": "gt/TP_R_L3_898_0.tif",
+    "noisy": "noisy/TP_R_L3_898_0.tif",
+    "stem": "TP_R_L3_898_0"
+  },
+  {
+    "key": [
+      "TP",
+      "R",
+      "4",
+      "877"
+    ],
+    "frame": 35,
+    "gt": "gt/TP_R_L4_877_35.tif",
+    "noisy": "noisy/TP_R_L4_877_35.tif",
+    "stem": "TP_R_L4_877_35"
+  },
+  {
+    "key": [
+      "WF",
+      "B",
+      "1",
+      "873"
+    ],
+    "frame": 44,
+    "gt": "gt/WF_B_L1_873_44.tif",
+    "noisy": "noisy/WF_B_L1_873_44.tif",
+    "stem": "WF_B_L1_873_44"
+  },
+  {
+    "key": [
+      "WF",
+      "B",
+      "2",
+      "845"
+    ],
+    "frame": 20,
+    "gt": "gt/WF_B_L2_845_20.tif",
+    "noisy": "noisy/WF_B_L2_845_20.tif",
+    "stem": "WF_B_L2_845_20"
+  },
+  {
+    "key": [
+      "WF",
+      "B",
+      "3",
+      "873"
+    ],
+    "frame": 20,
+    "gt": "gt/WF_B_L3_873_20.tif",
+    "noisy": "noisy/WF_B_L3_873_20.tif",
+    "stem": "WF_B_L3_873_20"
+  },
+  {
+    "key": [
+      "WF",
+      "B",
+      "4",
+      "916"
+    ],
+    "frame": 27,
+    "gt": "gt/WF_B_L4_916_27.tif",
+    "noisy": "noisy/WF_B_L4_916_27.tif",
+    "stem": "WF_B_L4_916_27"
+  },
+  {
+    "key": [
+      "WF",
+      "G",
+      "1",
+      "827"
+    ],
+    "frame": 19,
+    "gt": "gt/WF_G_L1_827_19.tif",
+    "noisy": "noisy/WF_G_L1_827_19.tif",
+    "stem": "WF_G_L1_827_19"
+  },
+  {
+    "key": [
+      "WF",
+      "G",
+      "2",
+      "913"
+    ],
+    "frame": 13,
+    "gt": "gt/WF_G_L2_913_13.tif",
+    "noisy": "noisy/WF_G_L2_913_13.tif",
+    "stem": "WF_G_L2_913_13"
+  },
+  {
+    "key": [
+      "WF",
+      "G",
+      "3",
+      "812"
+    ],
+    "frame": 48,
+    "gt": "gt/WF_G_L3_812_48.tif",
+    "noisy": "noisy/WF_G_L3_812_48.tif",
+    "stem": "WF_G_L3_812_48"
+  },
+  {
+    "key": [
+      "WF",
+      "G",
+      "4",
+      "912"
+    ],
+    "frame": 5,
+    "gt": "gt/WF_G_L4_912_5.tif",
+    "noisy": "noisy/WF_G_L4_912_5.tif",
+    "stem": "WF_G_L4_912_5"
+  },
+  {
+    "key": [
+      "WF",
+      "R",
+      "1",
+      "938"
+    ],
+    "frame": 24,
+    "gt": "gt/WF_R_L1_938_24.tif",
+    "noisy": "noisy/WF_R_L1_938_24.tif",
+    "stem": "WF_R_L1_938_24"
+  },
+  {
+    "key": [
+      "WF",
+      "R",
+      "2",
+      "893"
+    ],
+    "frame": 10,
+    "gt": "gt/WF_R_L2_893_10.tif",
+    "noisy": "noisy/WF_R_L2_893_10.tif",
+    "stem": "WF_R_L2_893_10"
+  },
+  {
+    "key": [
+      "WF",
+      "R",
+      "3",
+      "906"
+    ],
+    "frame": 44,
+    "gt": "gt/WF_R_L3_906_44.tif",
+    "noisy": "noisy/WF_R_L3_906_44.tif",
+    "stem": "WF_R_L3_906_44"
+  },
+  {
+    "key": [
+      "WF",
+      "R",
+      "4",
+      "866"
+    ],
+    "frame": 44,
+    "gt": "gt/WF_R_L4_866_44.tif",
+    "noisy": "noisy/WF_R_L4_866_44.tif",
+    "stem": "WF_R_L4_866_44"
+  }
+]

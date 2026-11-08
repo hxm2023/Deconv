@@ -1,0 +1,228 @@
+{
+  "psnr": [
+    {
+      "target": 30,
+      "dose": {
+        "tv": 10,
+        "nlm": null,
+        "wiener": 30,
+        "rl": 300,
+        "unet": 10
+      },
+      "unet_vs_tv": 1.0
+    },
+    {
+      "target": 32,
+      "dose": {
+        "tv": 100,
+        "nlm": null,
+        "wiener": 100,
+        "rl": null,
+        "unet": 10
+      },
+      "unet_vs_tv": 10.0
+    },
+    {
+      "target": 34,
+      "dose": {
+        "tv": null,
+        "nlm": null,
+        "wiener": null,
+        "rl": null,
+        "unet": 30
+      },
+      "unet_vs_tv": NaN
+    },
+    {
+      "target": 35,
+      "dose": {
+        "tv": null,
+        "nlm": null,
+        "wiener": null,
+        "rl": null,
+        "unet": 100
+      },
+      "unet_vs_tv": NaN
+    },
+    {
+      "target": 36,
+      "dose": {
+        "tv": null,
+        "nlm": null,
+        "wiener": null,
+        "rl": null,
+        "unet": 300
+      },
+      "unet_vs_tv": NaN
+    },
+    {
+      "target": 37,
+      "dose": {
+        "tv": null,
+        "nlm": null,
+        "wiener": null,
+        "rl": null,
+        "unet": null
+      },
+      "unet_vs_tv": NaN
+    },
+    {
+      "target": 38,
+      "dose": {
+        "tv": null,
+        "nlm": null,
+        "wiener": null,
+        "rl": null,
+        "unet": null
+      },
+      "unet_vs_tv": NaN
+    }
+  ],
+  "ssim": [
+    {
+      "target": 0.85,
+      "dose": {
+        "tv": 10,
+        "nlm": 10,
+        "wiener": 100,
+        "rl": 100,
+        "unet": 3
+      },
+      "unet_vs_tv": 3.3333333333333335
+    },
+    {
+      "target": 0.88,
+      "dose": {
+        "tv": 10,
+        "nlm": null,
+        "wiener": 100,
+        "rl": 300,
+        "unet": 3
+      },
+      "unet_vs_tv": 3.3333333333333335
+    },
+    {
+      "target": 0.9,
+      "dose": {
+        "tv": 30,
+        "nlm": null,
+        "wiener": 300,
+        "rl": 300,
+        "unet": 10
+      },
+      "unet_vs_tv": 3.0
+    },
+    {
+      "target": 0.92,
+      "dose": {
+        "tv": 100,
+        "nlm": null,
+        "wiener": 300,
+        "rl": 300,
+        "unet": 30
+      },
+      "unet_vs_tv": 3.3333333333333335
+    },
+    {
+      "target": 0.94,
+      "dose": {
+        "tv": null,
+        "nlm": null,
+        "wiener": null,
+        "rl": null,
+        "unet": 100
+      },
+      "unet_vs_tv": NaN
+    },
+    {
+      "target": 0.95,
+      "dose": {
+        "tv": null,
+        "nlm": null,
+        "wiener": null,
+        "rl": null,
+        "unet": 100
+      },
+      "unet_vs_tv": NaN
+    },
+    {
+      "target": 0.96,
+      "dose": {
+        "tv": null,
+        "nlm": null,
+        "wiener": null,
+        "rl": null,
+        "unet": 300
+      },
+      "unet_vs_tv": NaN
+    }
+  ],
+  "fg": [
+    {
+      "target": 22,
+      "dose": {
+        "tv": 10,
+        "nlm": null,
+        "wiener": 30,
+        "rl": 100,
+        "unet": 3
+      },
+      "unet_vs_tv": 3.3333333333333335
+    },
+    {
+      "target": 24,
+      "dose": {
+        "tv": 100,
+        "nlm": null,
+        "wiener": 30,
+        "rl": null,
+        "unet": 10
+      },
+      "unet_vs_tv": 10.0
+    },
+    {
+      "target": 26,
+      "dose": {
+        "tv": null,
+        "nlm": null,
+        "wiener": 300,
+        "rl": null,
+        "unet": 30
+      },
+      "unet_vs_tv": NaN
+    },
+    {
+      "target": 28,
+      "dose": {
+        "tv": null,
+        "nlm": null,
+        "wiener": null,
+        "rl": null,
+        "unet": 300
+      },
+      "unet_vs_tv": NaN
+    },
+    {
+      "target": 30,
+      "dose": {
+        "tv": null,
+        "nlm": null,
+        "wiener": null,
+        "rl": null,
+        "unet": null
+      },
+      "unet_vs_tv": NaN
+    },
+    {
+      "target": 32,
+      "dose": {
+        "tv": null,
+        "nlm": null,
+        "wiener": null,
+        "rl": null,
+        "unet": null
+      },
+      "unet_vs_tv": NaN
+    }
+  ]
+}

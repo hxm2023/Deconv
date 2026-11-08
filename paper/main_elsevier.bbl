@@ -1,0 +1,212 @@
+\begin{thebibliography}{10}
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\expandafter\ifx\csname href\endcsname\relax
+  \def\href#1#2{#2} \def\path#1{#1}\fi
+
+\bibitem{laissue2017phototoxicity}
+P.~P. Laissue, R.~A. Alghamdi, P.~Tomancak, E.~G. Reynaud, H.~Shroff, Assessing
+  phototoxicity in live fluorescence imaging, Nature Methods 14~(7) (2017)
+  657--661.
+
+\bibitem{richardson1972}
+W.~H. Richardson, Bayesian-based iterative method of image restoration, Journal
+  of the Optical Society of America 62~(1) (1972) 55--59.
+
+\bibitem{lucy1974}
+L.~B. Lucy, An iterative technique for the rectification of observed
+  distributions, The Astronomical Journal 79 (1974) 745--754.
+
+\bibitem{wiener1949}
+N.~Wiener, Extrapolation, Interpolation, and Smoothing of Stationary Time
+  Series, MIT Press, Cambridge, MA, 1949.
+
+\bibitem{chambolle2004}
+A.~Chambolle, An algorithm for total variation minimization and applications,
+  Journal of Mathematical Imaging and Vision 20~(1--2) (2004) 89--97.
+
+\bibitem{rudin1992}
+L.~I. Rudin, S.~Osher, E.~Fatemi, Nonlinear total variation based noise removal
+  algorithms, Physica D: Nonlinear Phenomena 60~(1--4) (1992) 259--268.
+\newblock \href {https://doi.org/10.1016/0167-2789(92)90242-F}
+  {\path{doi:10.1016/0167-2789(92)90242-F}}.
+
+\bibitem{buades2005}
+A.~Buades, B.~Coll, J.-M. Morel, A non-local algorithm for image denoising, in:
+  IEEE Conference on Computer Vision and Pattern Recognition, Vol.~2, 2005, pp.
+  60--65.
+
+\bibitem{kundur1996}
+D.~Kundur, D.~Hatzinakos, Blind image deconvolution, IEEE Signal Processing
+  Magazine 13~(3) (1996) 43--64.
+\newblock \href {https://doi.org/10.1109/79.489268}
+  {\path{doi:10.1109/79.489268}}.
+
+\bibitem{wallace2001}
+W.~Wallace, L.~H. Schaefer, J.~R. Swedlow, A workingperson's guide to
+  deconvolution in light microscopy, BioTechniques 31~(5) (2001) 1076--1097.
+\newblock \href {https://doi.org/10.2144/01315bi01}
+  {\path{doi:10.2144/01315bi01}}.
+
+\bibitem{weigert2018care}
+M.~Weigert, U.~Schmidt, T.~Boothe, A.~M{\"u}ller, A.~Dibrov, A.~Jain,
+  B.~Wilhelm, D.~Schmidt, C.~Broaddus, S.~Culley, M.~Rocha-Martins,
+  F.~Segovia-Miranda, C.~Norden, R.~Henriques, M.~Zerial, M.~Solimena, J.~Rink,
+  P.~Tomancak, L.~Royer, F.~Jug, E.~W. Myers, Content-aware image restoration:
+  pushing the limits of fluorescence microscopy, Nature Methods 15~(12) (2018)
+  1090--1097.
+
+\bibitem{gomez2021deepimagej}
+E.~G{\'o}mez-de Mariscal, C.~Garc{\'i}a-L{\'o}pez-de Haro, W.~Ouyang,
+  L.~Donati, E.~Lundberg, M.~Unser, A.~Mu{\~n}oz-Barrutia, D.~Sage, Deepimagej:
+  A user-friendly environment to run deep learning models in imagej, Nature
+  Methods 18~(10) (2021) 1192--1195.
+
+\bibitem{wang2019crossmodality}
+H.~Wang, Y.~Rivenson, Y.~Jin, Z.~Gao, H.~Buchholz, L.~A. Gunaydin, A.~Ozcan,
+  Deep learning enables cross-modality super-resolution in fluorescence
+  microscopy, Nature Methods 16~(1) (2019) 103--110.
+\newblock \href {https://doi.org/10.1038/s41592-018-0239-0}
+  {\path{doi:10.1038/s41592-018-0239-0}}.
+
+\bibitem{zhang2018ffdnet}
+K.~Zhang, W.~Zuo, L.~Zhang, Ffdnet: Toward a fast and flexible solution for
+  cnn-based image denoising, IEEE Transactions on Image Processing 27~(9)
+  (2018) 4608--4622.
+
+\bibitem{guo2019cbdnet}
+S.~Guo, Z.~Yan, K.~Zhang, W.~Zuo, L.~Zhang, Toward convolutional blind
+  denoising of real photographs, in: Proceedings of the IEEE/CVF Conference on
+  Computer Vision and Pattern Recognition, 2019, pp. 1712--1722.
+\newblock \href {https://doi.org/10.1109/CVPR.2019.00181}
+  {\path{doi:10.1109/CVPR.2019.00181}}.
+
+\bibitem{mohan2020biasfree}
+S.~Mohan, Z.~Kadkhodaie, E.~P. Simoncelli, C.~Fernandez-Granda, Robust and
+  interpretable blind image denoising via bias-free convolutional neural
+  networks, in: International Conference on Learning Representations, 2020.
+\newblock \href {https://doi.org/10.48550/arXiv.1906.05478}
+  {\path{doi:10.48550/arXiv.1906.05478}}.
+
+\bibitem{krull2019}
+A.~Krull, T.-O. Buchholz, F.~Jug, {Noise2Void} -- learning denoising from
+  single noisy images, in: Proceedings of the IEEE/CVF Conference on Computer
+  Vision and Pattern Recognition, 2019, pp. 2129--2137.
+\newblock \href {https://doi.org/10.1109/CVPR.2019.00223}
+  {\path{doi:10.1109/CVPR.2019.00223}}.
+
+\bibitem{liu2020degeneration}
+K.~Liu, X.~Huang, S.~Chen, S.~Tan, Deep learning-enhanced fluorescence
+  microscopy via degeneration decoupling, Optics Express 28~(10) (2020)
+  14859--14873.
+
+\bibitem{qiao2024zsdeconvnet}
+C.~Qiao, Y.~Zeng, Q.~Meng, X.~Chen, H.~Chen, T.~Jiang, R.~Wei, J.~Guo, W.~Fu,
+  H.~Lu, D.~Li, Y.~Wang, H.~Qiao, J.~Wu, D.~Li, Q.~Dai, Zero-shot learning
+  enables instant denoising and super-resolution in optical fluorescence
+  microscopy, Nature Communications 15 (2024) 4180.
+\newblock \href {https://doi.org/10.1038/s41467-024-48575-9}
+  {\path{doi:10.1038/s41467-024-48575-9}}.
+
+\bibitem{ye2025uncertainty}
+C.~T. Ye, J.~Han, K.~Liu, A.~Angelopoulos, L.~Griffith, K.~Monakhova, S.~You,
+  Learned, uncertainty-driven adaptive acquisition for photon-efficient
+  scanning microscopy, Optics Express 33~(6) (2025) 12269--12287.
+\newblock \href {https://doi.org/10.1364/OE.542640}
+  {\path{doi:10.1364/OE.542640}}.
+
+\bibitem{sheneman2025nearzero}
+L.~Sheneman, S.~Balogun, J.~L. Johnson, M.~J. Harrison, A.~E. Vasdekis,
+  Near-zero photon bioimaging by fusing deep learning and ultralow-light
+  microscopy, Proceedings of the National Academy of Sciences 122~(21) (2025)
+  e2412261122.
+
+\bibitem{ljosa2012bbbc}
+V.~Ljosa, K.~L. Sokolnicki, A.~E. Carpenter, Annotated high-throughput
+  microscopy image sets for validation, Nature Methods 9~(7) (2012) 637.
+
+\bibitem{ai4life_mdc25_2025}
+G.~Jacquemet, T.~Zulueta-Coarasa, V.~Ljosa, K.~L. Sokolnicki, A.~E. Carpenter,
+  {AI4Life-MDC25-Nuclei}, Zenodo, training set of the AI4Life Microscopy
+  Supervised Denoising Challenge 2025; CC BY 4.0 (2025).
+\newblock \href {https://doi.org/10.5281/zenodo.15624741}
+  {\path{doi:10.5281/zenodo.15624741}}.
+
+\bibitem{zhang2019fmd}
+Y.~Zhang, Y.~Zhu, E.~Nichols, Q.~Wang, S.~Zhang, C.~Smith, S.~Howard, A
+  {P}oisson-{G}aussian denoising dataset with real fluorescence microscopy
+  images, in: Proceedings of the IEEE/CVF Conference on Computer Vision and
+  Pattern Recognition, 2019, pp. 11710--11718.
+\newblock \href {https://doi.org/10.1109/CVPR.2019.01198}
+  {\path{doi:10.1109/CVPR.2019.01198}}.
+
+\bibitem{ai4life_mdc25_fmd_2025}
+Y.~Zhang, Y.~Zhu, E.~Nichols, Q.~Wang, S.~Zhang, C.~Smith, S.~Howard,
+  {AI4Life-MDC25-FMD}, Zenodo, training set of the AI4Life Microscopy
+  Supervised Denoising Challenge 2025; CC BY 4.0 (2025).
+\newblock \href {https://doi.org/10.5281/zenodo.15761900}
+  {\path{doi:10.5281/zenodo.15761900}}.
+
+\bibitem{ronneberger2015unet}
+O.~Ronneberger, P.~Fischer, T.~Brox, U-net: Convolutional networks for
+  biomedical image segmentation, in: Medical Image Computing and
+  Computer-Assisted Intervention (MICCAI), 2015, pp. 234--241.
+
+\bibitem{dabov2007}
+K.~Dabov, A.~Foi, V.~Katkovnik, K.~Egiazarian, Image denoising by sparse 3-d
+  transform-domain collaborative filtering, IEEE Transactions on Image
+  Processing 16~(8) (2007) 2080--2095.
+
+\bibitem{zhang2017dncnn}
+K.~Zhang, W.~Zuo, Y.~Chen, D.~Meng, L.~Zhang, Beyond a {G}aussian denoiser:
+  Residual learning of deep {CNN} for image denoising, IEEE Transactions on
+  Image Processing 26~(7) (2017) 3142--3155.
+
+\bibitem{boyd2011}
+S.~Boyd, N.~Parikh, E.~Chu, B.~Peleato, J.~Eckstein, Distributed optimization
+  and statistical learning via the alternating direction method of multipliers,
+  Foundations and Trends in Machine Learning 3~(1) (2011) 1--122.
+\newblock \href {https://doi.org/10.1561/2200000016}
+  {\path{doi:10.1561/2200000016}}.
+
+\bibitem{anscombe1948}
+F.~J. Anscombe, The transformation of {P}oisson, binomial and negative-binomial
+  data, Biometrika 35~(3--4) (1948) 246--254.
+\newblock \href {https://doi.org/10.1093/biomet/35.3-4.246}
+  {\path{doi:10.1093/biomet/35.3-4.246}}.
+
+\bibitem{makitalo2011}
+M.~M{\"a}kitalo, A.~Foi, Optimal inversion of the {A}nscombe transformation in
+  low-count {P}oisson image denoising, IEEE Transactions on Image Processing
+  20~(1) (2011) 99--109.
+\newblock \href {https://doi.org/10.1109/TIP.2010.2056693}
+  {\path{doi:10.1109/TIP.2010.2056693}}.
+
+\bibitem{wang2004ssim}
+Z.~Wang, A.~C. Bovik, H.~R. Sheikh, E.~P. Simoncelli, Image quality assessment:
+  From error visibility to structural similarity, IEEE Transactions on Image
+  Processing 13~(4) (2004) 600--612.
+\newblock \href {https://doi.org/10.1109/TIP.2003.819861}
+  {\path{doi:10.1109/TIP.2003.819861}}.
+
+\bibitem{lakshminarayanan2017ensembles}
+B.~Lakshminarayanan, A.~Pritzel, C.~Blundell, Simple and scalable predictive
+  uncertainty estimation using deep ensembles, in: Advances in Neural
+  Information Processing Systems, Vol.~30, 2017.
+
+\bibitem{batson2019noise2self}
+J.~Batson, L.~Royer, {Noise2Self}: Blind denoising by self-supervision, in:
+  Proceedings of the 36th International Conference on Machine Learning,
+  Vol.~97, 2019, pp. 524--533.
+\newblock \href {https://doi.org/10.48550/arXiv.1901.11365}
+  {\path{doi:10.48550/arXiv.1901.11365}}.
+
+\bibitem{blau2018perception}
+Y.~Blau, T.~Michaeli, The perception-distortion tradeoff, in: Proceedings of
+  the IEEE Conference on Computer Vision and Pattern Recognition, 2018, pp.
+  6228--6237.
+\newblock \href {https://doi.org/10.1109/CVPR.2018.00664}
+  {\path{doi:10.1109/CVPR.2018.00664}}.
+
+\end{thebibliography}
