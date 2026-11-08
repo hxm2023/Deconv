@@ -170,6 +170,7 @@ def main():
                     fontsize=5.2, color="white",
                     bbox=dict(fc="black", alpha=0.45, ec="none", pad=1.0))
     cax = fig.add_subplot(gs[2, 3])
+    cax.set_in_layout(False)
     cb = fig.colorbar(unc_artist, cax=cax, orientation="horizontal")
     vmax = float(unc_artist.norm.vmax)
     cb.set_ticks([0.0, 0.5 * vmax, vmax])
@@ -212,6 +213,11 @@ def main():
     ax.set_xlim(0, 1.02); ax.set_ylim(0, 1.02)
     ax.legend(fontsize=6.5, frameon=False, loc="lower right")
     ax.grid(alpha=0.25, lw=0.5)
+
+    fig.canvas.draw()
+    p = cax.get_position()
+    w = p.width * 0.66
+    cax.set_position([p.x0 + (p.width - w) / 2, p.y0, w, p.height])
 
     fig.savefig(OUT / "fig3_cross_uncertainty.pdf", dpi=300,
                 bbox_inches="tight")
