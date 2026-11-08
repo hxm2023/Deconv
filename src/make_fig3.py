@@ -12,6 +12,7 @@ import torch
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from matplotlib.ticker import FormatStrFormatter, MaxNLocator
 plt.rcParams.update({"font.size": 7, "axes.titlesize": 8,
                      "xtick.labelsize": 6.5, "ytick.labelsize": 6.5,
                      "legend.fontsize": 6.5})
@@ -107,8 +108,8 @@ def main():
     mean, var = mean[0], var[0]
     err = np.abs(np.clip(mean, 0, 1) - gt)
 
-    fig = plt.figure(figsize=(7.2, 4.9), constrained_layout=True)
-    gs = fig.add_gridspec(4, 4, height_ratios=[0.85, 0.95, 0.22, 0.85])
+    fig = plt.figure(figsize=(7.2, 4.4), constrained_layout=True)
+    gs = fig.add_gridspec(3, 4, height_ratios=[0.85, 0.95, 0.85])
 
     # (a) cross-dataset gains
     ax = fig.add_subplot(gs[0, :2])
@@ -154,10 +155,9 @@ def main():
             (np.sqrt(np.clip(var, 0, None)), "Uncertainty", "magma",
              dict(vmin=0, vmax=float(np.quantile(np.sqrt(var), 0.99)))),
             (err, "|Error|", "inferno", dict(vmin=0, vmax=0.15))]
-    unc_artist = None
     for c, (im, name, cmap, kw) in enumerate(maps[:4]):
         ax = fig.add_subplot(gs[1, c])
-        unc_artist = ax.imshow(im, cmap=cmap, **kw)
+        ax.imshow(im, cmap=cmap, **kw)
         ax.set_title(("(c) " if c == 0 else "") + name, fontsize=8,
                      fontweight="bold" if c == 0 else "normal")
         ax.set_xticks([]); ax.set_yticks([])
@@ -169,18 +169,18 @@ def main():
                     transform=ax.transAxes, va="bottom", ha="left",
                     fontsize=5.2, color="white",
                     bbox=dict(fc="black", alpha=0.45, ec="none", pad=1.0))
-    cax = fig.add_subplot(gs[2, 3])
-    cax.set_in_layout(False)
-    cb = fig.colorbar(unc_artist, cax=cax, orientation="horizontal")
-    vmax = float(unc_artist.norm.vmax)
-    cb.set_ticks([0.0, 0.5 * vmax, vmax])
-    cb.set_ticklabels(["0", f"{0.5 * vmax:.4f}", f"{vmax:.4f}"])
-    cb.set_label("uncertainty (std)", fontsize=6.0, labelpad=1.0)
-    cb.ax.tick_params(labelsize=5.5, width=0.3, length=1.2)
-    cb.outline.set_linewidth(0.3)
+        if name == "Uncertainty":
+            cb = fig.colorbar(ax.images[0], ax=ax, orientation="horizontal",
+                              fraction=0.055, pad=0.02)
+            cb.locator = MaxNLocator(nbins=4)
+            cb.formatter = FormatStrFormatter("%.4f")
+            cb.update_ticks()
+            cb.set_label("std", fontsize=5.2, labelpad=1)
+            cb.ax.tick_params(labelsize=5.2, width=0.3, length=1.5)
+            cb.outline.set_linewidth(0.4)
 
     # (c) calibration
-    ax = fig.add_subplot(gs[3, :2])
+    ax = fig.add_subplot(gs[2, :2])
     u = np.array([r["3"]["unc"] for r in fov_rows])
     e = np.array([r["3"]["err"] for r in fov_rows])
     rho = spearmanr(u, e).statistic
@@ -195,7 +195,7 @@ def main():
     ax.grid(alpha=0.25, lw=0.5)
 
     # (d) re-acquisition trade-off
-    ax = fig.add_subplot(gs[3, 2:])
+    ax = fig.add_subplot(gs[2, 2:])
     for d, col in [(3, "#C44536"), (10, "#E09F3E")]:
         scores = np.array([r[str(d)]["unc"] for r in fov_rows])
         labels = np.array([r[str(d)]["psnr"] < 34 for r in fov_rows])
@@ -213,11 +213,6 @@ def main():
     ax.set_xlim(0, 1.02); ax.set_ylim(0, 1.02)
     ax.legend(fontsize=6.5, frameon=False, loc="lower right")
     ax.grid(alpha=0.25, lw=0.5)
-
-    fig.canvas.draw()
-    p = cax.get_position()
-    w = p.width * 0.66
-    cax.set_position([p.x0 + (p.width - w) / 2, p.y0, w, p.height])
 
     fig.savefig(OUT / "fig3_cross_uncertainty.pdf", dpi=300,
                 bbox_inches="tight")
